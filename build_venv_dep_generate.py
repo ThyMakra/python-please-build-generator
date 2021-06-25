@@ -33,9 +33,9 @@ with open(TEMP_FILE, "w") as temp_json:
 with open(TEMP_FILE, "r") as dep_json, open(FILE_PATH, "w") as build_file:
     packages = json.load(dep_json)
     for package in packages:
-        package_name = package['package']['package_name']
+        package_name = package['package']['key']
         package_version = package['package']['installed_version']
-        dependencies = [s['package_name'] for s in package['dependencies']]
+        dependencies = [s['key'] for s in package['dependencies']]
         # 
         if dependencies:
             dependencies_format = '":' + '", ":'.join(dependencies) + '"'
