@@ -1,5 +1,17 @@
 # Generate please.build BUILD file for installed Python packages
 
+While Please is a really great build system with many awesome features like cross-language support, explicit declaration etc. It is still a headache to import the installed packages/libraries into BUILD file. 
+
+With the help of Python tools such as `pipdeptree`, it eases a lot of hard works but you still need to manually write down each build rule for every dependencies. 
+It can get really challenging when you encounter with a libary that has many dependencies and each has its own sub-level dependencies and so on.
+
+This repository is created with the purpose to make the process of importing installed libraries into BUILD file quicker and easier.
+
+**Note**: Important things to note is that this project can not (yet) be integrated into your existed project or application and need to be isolated with its own virtual environment.
+- It can be cloned to run independently to get build rules for one or more Python packages.
+- Though it still has limitations for it can only supports 3 rules (currently) such as, `name`, `version` and `deps`.
+
+
 ## Table of Content
 
 1. [Generate BUILD file of all packages in a virtual environment](#generate-plzbuild-build-file-of-all-packages-in-a-virtual-environment)
