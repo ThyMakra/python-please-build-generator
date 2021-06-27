@@ -1,15 +1,15 @@
-# Generate BUILD from pipdeptree
+# Generate please.build BUILD file for installed Python packages 
 
 ## Table of Content
 
-1. Generate [plz.build](http://plz.build) BUILD file of all packages in a virtual environment
-2. Generate [plz.build](http://plz.build) BUILD file of a package and its dependencies
-- Other Procedure
+1. [Generate [plz.build](http://plz.build) BUILD file of all packages in a virtual environment](#generate-plzbuild-build-file-of-all-packages-in-a-virtual-environment)
+2. [Generate [plz.build](http://plz.build) BUILD file of a package and its dependencies](generate-plzbuild-build-file-of-a-package-and-its-dependencies)
+- [Other Procedure](#other-procedure)
 
 ## Pre-requisite
 
-1. Activate virtual environment into the project
-2. Package `pipdeptree` installed inside the virtual environment
+1. [Activate virtual environment into the project](activate-a-virtual-environment)
+2. [Package `pipdeptree` installed inside the virtual environment](install-pipdeptree)
 
 ## Generate [plz.build](http://plz.build) BUILD file of all packages in a virtual environment
 
