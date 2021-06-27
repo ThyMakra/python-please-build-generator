@@ -7,14 +7,14 @@ from lib.build_string_formatter import get_pip_library_string
 Generate a BUILD file for please.build from all installed python packages inside a virtual environment
  """
 # virtual environment
-ENV_NAME = 'venv'
-PYTHON_PACKAGE = 'python'
-PYTHON_ENV_PATH = './{0}/bin/{1}'.format(ENV_NAME, PYTHON_PACKAGE)
+ENV_NAME = "venv"
+PYTHON_PACKAGE = "python"
+PYTHON_ENV_PATH = "./{0}/bin/{1}".format(ENV_NAME, PYTHON_PACKAGE)
 # output file
-FILE_NAME = 'BUILD'
-FILE_PATH = './{}'.format(FILE_NAME)
-# temporary json file 
-TEMP_FILE = './temporary.json'
+FILE_NAME = "BUILD"
+FILE_PATH = "./{}".format(FILE_NAME)
+# temporary json file
+TEMP_FILE = "./temporary.json"
 
 
 def main():
@@ -22,10 +22,12 @@ def main():
     # writing output to a temporary json
     with open(TEMP_FILE, "w") as temp_json:
         try:
-            command = [PYTHON_ENV_PATH, '-m', 'pipdeptree', '--json']
+            command = [PYTHON_ENV_PATH, "-m", "pipdeptree", "--json"]
             subprocess.run(command, stdout=temp_json)
         except Exception:
-            print('Please check if the virtual environment name is the same as ENV_NAME or the python interpreter is the same as PYTHON_PACKAGE')
+            print(
+                "Please check if the virtual environment name is the same as ENV_NAME or the python interpreter is the same as PYTHON_PACKAGE"
+            )
             exit()
 
     # read pipdeptree output from json and generate BUILD file
@@ -33,15 +35,22 @@ def main():
         try:
             packages = json.load(dep_json)
             if len(packages) == 0:
-                print('Please check if the virtual environment is not empty')
+                print("Please check if the virtual environment is not empty")
             for package in packages:
-                package_name = package['package']['key']
-                package_version = package['package']['installed_version']
-                dependencies = [s['key'] for s in package['dependencies']]
+                package_name = package["package"]["key"]
+                package_version = package["package"]["installed_version"]
+                dependencies = [s["key"] for s in package["dependencies"]]
                 # append the pip_library() string to BUILD
-                build_file.write(get_pip_library_string(dependencies, package_name, package_version))
+                build_file.write(
+                    get_pip_library_string(
+                        dependencies, package_name, package_version
+                    )
+                )
         except Exception:
-            print('Please check if pipdeptree is installed in the virtual environment')
+            print(
+                "Please check if pipdeptree is installed in the virtual environment"
+            )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

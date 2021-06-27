@@ -1,4 +1,4 @@
-# Generate please.build BUILD file for installed Python packages 
+# Generate please.build BUILD file for installed Python packages
 
 ## Table of Content
 
@@ -21,13 +21,13 @@ This can be used for :
 ### Usage
 
 - Variables
-    - `ENV_NAME` : the name of the virtual environment containing the dependencies. By default is `venv`.
-    - `PYTHON_PACKAGE` : the name of the python interpreter inside the virtual environment. By default is `python`.
+  - `ENV_NAME` : the name of the virtual environment containing the dependencies. By default is `venv`.
+  - `PYTHON_PACKAGE` : the name of the python interpreter inside the virtual environment. By default is `python`.
 - **Note**: To generate `pip_library()` for the packages into the BUILD file, make sure that
     1. You have virtual environment activated with the same name as the `ENV_NAME`
     2. Have `pipdeptree` installed inside the virtual environment
 - Generating the BUILD file
-    1. Running the python file and it will generate a BUILD file 
+    1. Running the python file and it will generate a BUILD file
 
         ```bash
         (venv)$ python build_dep_venv_generator.py
@@ -43,7 +43,7 @@ This can be used for :
 ### Usage
 
 - Required Variables
-    - `PACKAGE_NAME` : the name of the package that
+  - `PACKAGE_NAME` : the name of the package that
 - **Note**: To generate `pip_library()` for the packages into the BUILD file, make sure that
     1. You have virtual environment activated with the same name as the `ENV_NAME`
     2. Have `pipdeptree` installed inside the virtual environment
@@ -63,7 +63,7 @@ This can be used for :
         PACKAGE_NAME = 'flask'
         ```
 
-    3. Running the python file and it will generate a BUILD file 
+    3. Running the python file and it will generate a BUILD file
 
         ```bash
         (venv)$ python build_package_venv_generator.py
