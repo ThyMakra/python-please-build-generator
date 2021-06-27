@@ -8,8 +8,8 @@
 
 ## Pre-requisite
 
-1. [Activate virtual environment into the project](activate-a-virtual-environment)
-2. [Package `pipdeptree` installed inside the virtual environment](install-pipdeptree)
+1. [Activate virtual environment into the project](#activate-a-virtual-environment)
+2. [Package `pipdeptree` installed inside the virtual environment](#install-pipdeptree)
 
 ## Generate [plz.build](http://plz.build) BUILD file of all packages in a virtual environment
 
