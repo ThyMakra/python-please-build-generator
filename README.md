@@ -2,8 +2,8 @@
 
 ## Table of Content
 
-1. [Generate [plz.build](http://plz.build) BUILD file of all packages in a virtual environment](#generate-plzbuild-build-file-of-all-packages-in-a-virtual-environment)
-2. [Generate [plz.build](http://plz.build) BUILD file of a package and its dependencies](generate-plzbuild-build-file-of-a-package-and-its-dependencies)
+1. [Generate BUILD file of all packages in a virtual environment](#generate-plzbuild-build-file-of-all-packages-in-a-virtual-environment)
+2. [Generate BUILD file of a package and its dependencies](#generate-plzbuild-build-file-of-a-package-and-its-dependencies)
 - [Other Procedure](#other-procedure)
 
 ## Pre-requisite
