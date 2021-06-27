@@ -5,7 +5,7 @@ import subprocess, json
 Generate a BUILD file for please.build from a provided python packages and its dependencies
  """
 # Provide package name here
-PACKAGE_NAME = 'pandas-profiling'
+PACKAGE_NAME = 'flask'
 
 # virtual environment
 ENV_NAME = 'venv'
@@ -31,37 +31,34 @@ PYTHON_LIBRARY_FORMAT_WITHOUT_DEPENDENCIES = """pip_library(
 
 """
 
-def load_dependencies():
-    pass
-
 def main():
 
     # writing output to a temporary json
     with open(TEMP_FILE, "w") as temp_json:
-        command = [PYTHON_ENV_PATH, '-m', 'pipdeptree', '-p', PACKAGE_NAME, '--json']
-        subprocess.run(command, stdout=temp_json)
+        try:
+            command = [PYTHON_ENV_PATH, '-m', 'pipdeptree', '-p', PACKAGE_NAME, '--json']
+            subprocess.run(command, stdout=temp_json)
+        except Exception:
+            print('Please check if the virtual environment name is the same as ENV_NAME or the python interpreter is the same as PYTHON_PACKAGE')
+            exit()
     # read pipdeptree output from json and generate BUILD file
     with open(TEMP_FILE, "r") as dep_json, open(FILE_PATH, "w") as build_file:
-        # packages = json.load(dep_json)
         try:
             packages = json.load(dep_json)
-            print(packages)
             if len(packages) == 0:
-                print('package is not found')
+                print('Please check if package {} is installed in the virtual environment'.format(PYTHON_PACKAGE))
+            for package in packages:
+                package_name = package['package']['key']
+                package_version = package['package']['installed_version']
+                dependencies = [s['key'] for s in package['dependencies']]
+                # if a package requires other dependencies
+                if dependencies:
+                    dependencies_format = '":' + '", ":'.join(dependencies) + '"'
+                    build_file.write(PYTHON_LIBRARY_FORMAT_WITH_DEPENDENCIES.format(package_name, package_version, dependencies_format))
+                else:
+                    build_file.write(PYTHON_LIBRARY_FORMAT_WITHOUT_DEPENDENCIES.format(package_name, package_version))
         except Exception:
-            print('Please check if the virtual enviroment contains pipdeptree or {} package'.format(
-                PACKAGE_NAME
-            ))
-        # for package in packages:
-        #     package_name = package['package']['key']
-        #     package_version = package['package']['installed_version']
-        #     dependencies = [s['key'] for s in package['dependencies']]
-        #     # 
-        #     if dependencies:
-        #         dependencies_format = '":' + '", ":'.join(dependencies) + '"'
-        #         build_file.write(PYTHON_LIBRARY_FORMAT_WITH_DEPENDENCIES.format(package_name, package_version, dependencies_format))
-        #     else:
-        #         build_file.write(PYTHON_LIBRARY_FORMAT_WITHOUT_DEPENDENCIES.format(package_name, package_version))
+            print('Please check if pipdeptree is installed in the virtual environment')
 
 if __name__ == '__main__':
     main()
