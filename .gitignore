@@ -1,0 +1,6 @@
+# virtual environment
+venv/
+# generated file
+BUILD
+temporary.json
+
