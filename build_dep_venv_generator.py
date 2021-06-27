@@ -40,7 +40,7 @@ def main():
                 package_name = package["package"]["key"]
                 package_version = package["package"]["installed_version"]
                 dependencies = [s["key"] for s in package["dependencies"]]
-                # append the pip_library() string to BUILD
+                # write the pip_library string to BUILD
                 build_file.write(
                     get_pip_library_string(
                         dependencies, package_name, package_version
