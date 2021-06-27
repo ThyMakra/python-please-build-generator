@@ -1,5 +1,7 @@
 import subprocess, json
 
+from lib.build_string_formatter import get_pip_library_string
+
 
 """ 
 Generate a BUILD file for please.build from all installed python packages inside a virtual environment
@@ -13,20 +15,7 @@ FILE_NAME = 'BUILD'
 FILE_PATH = './{}'.format(FILE_NAME)
 # temporary json file 
 TEMP_FILE = './temporary.json'
-# BUILD file format
-PYTHON_LIBRARY_FORMAT_WITH_DEPENDENCIES = """pip_library(
-    name = "{0}",
-    version = "{1}",
-    deps = [{2}],
-)
 
-"""
-PYTHON_LIBRARY_FORMAT_WITHOUT_DEPENDENCIES = """pip_library(
-    name = "{0}",
-    version = "{1}",
-)
-
-"""
 
 def main():
 
@@ -49,12 +38,8 @@ def main():
                 package_name = package['package']['key']
                 package_version = package['package']['installed_version']
                 dependencies = [s['key'] for s in package['dependencies']]
-                # 
-                if dependencies:
-                    dependencies_format = '":' + '", ":'.join(dependencies) + '"'
-                    build_file.write(PYTHON_LIBRARY_FORMAT_WITH_DEPENDENCIES.format(package_name, package_version, dependencies_format))
-                else:
-                    build_file.write(PYTHON_LIBRARY_FORMAT_WITHOUT_DEPENDENCIES.format(package_name, package_version))
+                # append the pip_library() string to BUILD
+                build_file.write(get_pip_library_string(dependencies, package_name, package_version))
         except Exception:
             print('Please check if pipdeptree is installed in the virtual environment')
 
