@@ -3,7 +3,7 @@
 While Please is a really great build system with many awesome features like cross-language support, explicit declaration etc. It is still a headache to import the installed packages/libraries into a BUILD file. 
 
 With the help of Python tools such as `pipdeptree`, it eases a lot of hard works but you still need to manually write down each build rule for every dependencies. 
-It can get really challenging when you encounter with a lirbary that has many dependencies and each has its own sub-level dependencies and so on.
+It can get really challenging when you encounter with a library that has many dependencies and each has its own sub-level dependencies and so on.
 
 This repository is created with the purpose to make the process of importing installed libraries into BUILD file quicker and easier.
 
